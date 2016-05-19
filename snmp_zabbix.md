@@ -41,19 +41,24 @@
 ###Bước2:Cài đặt gói PHP
 ###Bước3:Cài đặt gói MySQL server
 ###Bước4:Cài đặt các gói hỗ trợ Zabbix
+
 `yum -y install php-mysql php-gd php-xml php-bcmath`
 
 `yum -y install http://repo.zabbix.com/zabbix/2.4/rhel/6/x86_64/zabbix-release-2.4-1.el6.noarch.rpm`
 
 ###Bước 5:Cài đặt Zabbix server, Zabbix agent để theo dõi chính nó
+
 `yum -y install zabbix-server-mysql zabbix-web-mysql zabbix-agent zabbix_get`
 
 ###Bước 6:Tạo database cho Zabbix
 - Đăng nhập mysql
+
 `mysql -u root -p`
 - Tạo database zabbix 
+
 `create database zabbix;`
 - Tạo và gán quyền user zabbix 
+
 `grant all privileges on zabbix.* to zabbix@'localhost' identified by 'password';`
 
 `grant all privileges on zabbix.* to zabbix@'%' identified by 'password';`
@@ -61,6 +66,7 @@
 `flush privileges;`
 
 - Sao chép cơ sở dữ liệu vào database zabbix
+
 `cd /usr/share/doc/zabbix-server-mysql-*/create`
 
 `mysql -u root -p zabbix < schema.sql`
@@ -68,6 +74,7 @@
 `mysql -u root -p zabbix < data.sql`
 
 - Cấu hình Zabbix server
+
 `vi /etc/zabbix/zabbix_server.conf`
 
 ```
@@ -78,11 +85,13 @@ DBPassword=password
 ```
 
 - Khởi động Zabbix server
+
 `/etc/rc.d/init.d/zabbix-server start`
 
 `chkconfig zabbix-server on `
 
 - Cấu hình Zabbix agent
+
 `vi /etc/zabbix/zabbix_agentd.conf`
 
 ```
@@ -95,11 +104,13 @@ Hostname=name
 ```
 
 - Khởi động Zabbix agent
+
 `/etc/rc.d/init.d/zabbix-agent start `
 
 `chkconfig zabbix-agent on`
 
 - Chỉnh cấu hình httpd
+
 `vi /etc/httpd/conf.d/zabbix.conf`
 
 ```
