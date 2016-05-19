@@ -3,6 +3,7 @@
 - SNMP (Simple Network Management Protocol) là một tiêu chuẩn quản lý mạng được sử dụng rộng rãi trong các mạng truyền thông hỗ trợ giao thức TCP/IP
 - SNMP cung cấp một phương thức quản lý các thiết bị như máy trạm hoặc máy chủ, bộ định tuyến, cầu, hub từ một máy tính trung tâm chứa phần mềm quản lý mạng
 - SNMP hiện có 4 phiên bản: SNMPv1, SNMPv2c, SNMPv2u,SNMPv3.
+
 ##II.Vai trò
 	SNMP có thể giúp giải quyết các bài toán như:
 - Cấu hình các thiết bị từ xa
