@@ -5,7 +5,7 @@
 - SNMP hiện có 4 phiên bản: SNMPv1, SNMPv2c, SNMPv2u,SNMPv3.
 
 ##II.Vai trò
-	SNMP có thể giúp giải quyết các bài toán như:
+SNMP có thể giúp giải quyết các bài toán như:
 - Cấu hình các thiết bị từ xa
 - Giám sát tài nguyên máy chủ
 - Giám sát lưu lượng trên các port của switch, router
@@ -13,9 +13,11 @@
 
 ##III.Thành phần
 - Theo RFC1157, kiến trúc của SNMP bao gồm 2 thành phần : 
+
  -Các trạm quản lý mạng (**network management station-NMS**)
  -Các thành tố mạng (**network element-NE**)
 - Tiến trình:
+
  - Tiến trình chạy trên NMS được gọi là **SNMP Application**
  - Tiến trình chạy trên NE được gọi là **SNMP Agent**
 - Một thiết bị hỗ trợ SNMP có thể cung cấp nhiều thông tin khác nhau, mỗi thông tin đó gọi là một **object**. Mỗi object có một tên gọi và một mã số để nhận dạng object đó, mã số gọi là **Object ID (OID)**. Ví dụ: Tên thiết bị được gọi là sysName, OID là 1.3.6.1.2.1.1.5
