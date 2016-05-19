@@ -14,8 +14,8 @@ SNMP có thể giúp giải quyết các bài toán như:
 ##III.Thành phần
 - Theo RFC1157, kiến trúc của SNMP bao gồm 2 thành phần : 
 
- -Các trạm quản lý mạng (**network management station-NMS**)
- -Các thành tố mạng (**network element-NE**)
+ - Các trạm quản lý mạng (**network management station-NMS**)
+ - Các thành tố mạng (**network element-NE**)
 - Tiến trình:
 
  - Tiến trình chạy trên NMS được gọi là **SNMP Application**
