@@ -12,8 +12,8 @@
 
 ##III.Thành phần
 - Theo RFC1157, kiến trúc của SNMP bao gồm 2 thành phần : 
- - Các trạm quản lý mạng (**network management station-NMS**)
- - Các thành tố mạng (**network element-NE**)
+ -Các trạm quản lý mạng (**network management station-NMS**)
+ -Các thành tố mạng (**network element-NE**)
 - Tiến trình:
  - Tiến trình chạy trên NMS được gọi là **SNMP Application**
  - Tiến trình chạy trên NE được gọi là **SNMP Agent**
@@ -36,3 +36,79 @@
 | Trap | Agent tự động gửi Trap cho Manager khi có một sự kiện xảy ra đối với một object nào đó trong agent. |
 
 #B.Zabbix
+##I.Cài đặt Zabbix 2.4 server trên CentOS6
+###Bước1:Cài đặt gói Apache httpd
+###Bước2:Cài đặt gói PHP
+###Bước3:Cài đặt gói MySQL server
+###Bước4:Cài đặt các gói hỗ trợ Zabbix
+`yum -y install php-mysql php-gd php-xml php-bcmath`
+
+`yum -y install http://repo.zabbix.com/zabbix/2.4/rhel/6/x86_64/zabbix-release-2.4-1.el6.noarch.rpm`
+
+###Bước 5:Cài đặt Zabbix server, Zabbix agent để theo dõi chính nó
+`yum -y install zabbix-server-mysql zabbix-web-mysql zabbix-agent zabbix_get`
+
+###Bước 6:Tạo database cho Zabbix
+- Đăng nhập mysql
+`mysql -u root -p`
+- Tạo database zabbix 
+`create database zabbix;`
+- Tạo và gán quyền user zabbix 
+`grant all privileges on zabbix.* to zabbix@'localhost' identified by 'password';`
+
+`grant all privileges on zabbix.* to zabbix@'%' identified by 'password';`
+
+`flush privileges;`
+
+- Sao chép cơ sở dữ liệu vào database zabbix
+`cd /usr/share/doc/zabbix-server-mysql-*/create`
+
+`mysql -u root -p zabbix < schema.sql`
+`mysql -u root -p zabbix < images.sql`
+`mysql -u root -p zabbix < data.sql`
+
+- Cấu hình Zabbix server
+`vi /etc/zabbix/zabbix_server.conf`
+
+```
+# line 73: add
+DBHost=localhost
+# line 107: add DB password for Zabbix
+DBPassword=password
+```
+
+- Khởi động Zabbix server
+`/etc/rc.d/init.d/zabbix-server start`
+
+`chkconfig zabbix-server on `
+
+- Cấu hình Zabbix agent
+`vi /etc/zabbix/zabbix_agentd.conf`
+
+```
+# line 85: specify Zabbix server
+Server=ip-server
+# line 126: specify Zabbix server
+ServerActive=ip-server
+# line 137: change to the own hostname
+Hostname=name
+```
+
+- Khởi động Zabbix agent
+`/etc/rc.d/init.d/zabbix-agent start `
+
+`chkconfig zabbix-agent on`
+
+- Chỉnh cấu hình httpd
+`vi /etc/httpd/conf.d/zabbix.conf`
+
+```
+# line 11: change access permittion for Zabbix frontend
+Allow from localhost dai-ip-allow
+# line 18: uncomment and change to your timezone
+php_value date.timezone Asia/Bangkok
+```
+
+`/etc/rc.d/init.d/httpd restart`
+
+- Truy cập địa chỉ ip-server để cấu hình trên giao diện web.
