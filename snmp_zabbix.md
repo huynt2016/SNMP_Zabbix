@@ -11,7 +11,9 @@
 - Hệ thống tự động cảnh báo sự cố tức thời
 
 ##III.Thành phần
-- Theo RFC1157, kiến trúc của SNMP bao gồm 2 thành phần : các trạm quản lý mạng (**network management station-NMS**) và các thành tố mạng (**network element-NE**)
+- Theo RFC1157, kiến trúc của SNMP bao gồm 2 thành phần : 
+ - Các trạm quản lý mạng (**network management station-NMS**)
+ - Các thành tố mạng (**network element-NE**)
 - Tiến trình:
  - Tiến trình chạy trên NMS được gọi là **SNMP Application**
  - Tiến trình chạy trên NE được gọi là **SNMP Agent**
