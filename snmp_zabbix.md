@@ -36,7 +36,7 @@
 | Trap | Agent tự động gửi Trap cho Manager khi có một sự kiện xảy ra đối với một object nào đó trong agent. |
 
 #B.Zabbix
-##I.Cài đặt Zabbix 2.4 server trên CentOS6
+##I.Cài đặt Zabbix server 2.4 trên CentOS6
 ###Bước1:Cài đặt gói Apache httpd
 ###Bước2:Cài đặt gói PHP
 ###Bước3:Cài đặt gói MySQL server
@@ -123,3 +123,58 @@ php_value date.timezone Asia/Bangkok
 `/etc/rc.d/init.d/httpd restart`
 
 - Truy cập địa chỉ ip-server để cấu hình trên giao diện web.
+
+##II.Cài đặt giám sát máy CentOS6
+###Bước 1: Cài đặt Zabbix agent
+- Cài gói hỗ trợ Zabbix
+
+`yum -y install http://repo.zabbix.com/zabbix/2.4/rhel/6/x86_64/zabbix-release-2.4-1.el6.noarch.rpm`
+
+- Cài Zabbix agent
+
+`yum -y install zabbix-agent`
+
+- Cấu hình Zabbix agent
+
+`vi /etc/zabbix/zabbix_agentd.conf`
+
+```
+# line 85: specify Zabbix server
+Server=ip-server
+# line 126: specify Zabbix server
+ServerActive=ip-server
+# line 137: change to the own hostname
+Hostname=name-client
+```
+- Khởi động Zabbix agent
+`/etc/rc.d/init.d/zabbix-agent start`
+
+`chkconfig zabbix-agent on`
+
+###Bước 2: Cấu hình trên Zabbix server
+- Đăng nhập tài khoản zabbix
+
+<img src="http://img.prntscr.com/img?url=http://i.imgur.com/XpsUQom.png">
+
+- Chọn **Configuration** -> **Hosts** -> **Creat Host**
+
+<img src="http://img.prntscr.com/img?url=http://i.imgur.com/1TqSouh.png">
+
+- Cấu hình phần **Host**: Nhập Hostname; Chọn Group; Điền IP client
+
+<img src="http://img.prntscr.com/img?url=http://i.imgur.com/qVUL7Td.png">
+
+- Cấu hình phần **Templates**: Chọn Select
+
+<img src="http://img.prntscr.com/img?url=http://i.imgur.com/euHMiKS.png">
+
+- Chọn OS rồi click Select
+
+<img src="http://img.prntscr.com/img?url=http://i.imgur.com/uzL4By3.png">
+
+- Chọn **Add**
+
+<img src="http://img.prntscr.com/img?url=http://i.imgur.com/Wq4t49y.png">
+
+- Hoàn thành thêm thiết bị giám sát.
+
