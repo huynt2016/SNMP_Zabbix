@@ -36,6 +36,9 @@ SNMP có thể giúp giải quyết các bài toán như:
 | GetResponse | Agent gửi GetResponse cho Manager để trả lời khi nhận được GetRequest/GetNextRequest |
 | Trap | Agent tự động gửi Trap cho Manager khi có một sự kiện xảy ra đối với một object nào đó trong agent. |
 
+- Đối với các phương thức Get/Set/Response thì SNMP Agent lắng nghe ở port UDP 161, còn phương thức
+trap thì SNMP Trap Receiver lắng nghe ở port UDP 162.
+
 #B.Zabbix
 ##I.Cài đặt Zabbix server 2.4 trên CentOS6
 ###Bước1:Cài đặt gói Apache httpd
